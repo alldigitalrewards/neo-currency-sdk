@@ -4,6 +4,13 @@ namespace AllDigitalRewards\NeoCurrency;
 
 abstract class AbstractEntity
 {
+    public function __construct($data = null)
+    {
+        if (!is_null($data)) {
+            $this->hydrate($data);
+        }
+    }
+
     public function hydrate($data): AbstractEntity
     {
         foreach ($data as $key => $value) {
