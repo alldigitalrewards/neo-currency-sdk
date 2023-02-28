@@ -39,7 +39,7 @@ trait HasEnvironmentsTrait
      * Unfortunately doing this because their sandbox doesn't have a token endpoint
      * And collides with cleanly making a BaseUrl if in Sandbox env
      */
-    public function getTokenUrl(): string
+    public function getAccessTokenUrl(): string
     {
         return $this->prodUrl . '/get-token';
     }
