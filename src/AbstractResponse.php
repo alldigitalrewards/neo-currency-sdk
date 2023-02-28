@@ -4,7 +4,6 @@ namespace AllDigitalRewards\NeoCurrency;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface;
-use stdClass;
 
 abstract class AbstractResponse extends AbstractEntity
 {
@@ -35,7 +34,7 @@ abstract class AbstractResponse extends AbstractEntity
 
     abstract public function extractData(array $data): AbstractResponse;
 
-    public function getError($errors): array
+    private function getError($errors): array
     {
         $flat = [];
         foreach($errors as $value) {
