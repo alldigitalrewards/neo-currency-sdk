@@ -37,11 +37,10 @@ abstract class AbstractResponse extends AbstractEntity
     private function getError($errors): array
     {
         $flat = [];
-        foreach($errors as $value) {
+        foreach ($errors as $value) {
             if (is_array($value)) {
                 $flat = array_merge($flat, $this->getError($value));
-            }
-            else {
+            } else {
                 $flat[] = $value;
             }
         }

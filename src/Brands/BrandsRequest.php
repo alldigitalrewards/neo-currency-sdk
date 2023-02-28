@@ -2,16 +2,11 @@
 
 namespace AllDigitalRewards\NeoCurrency\Brands;
 
+use AllDigitalRewards\NeoCurrency\AbstractRequest;
 use AllDigitalRewards\NeoCurrency\HasResponse;
-use AllDigitalRewards\NeoCurrency\Traits\HasEnvironmentsTrait;
-use GuzzleHttp\Psr7\Request;
 
-class BrandsRequest extends Request implements HasResponse
+class BrandsRequest extends AbstractRequest implements HasResponse
 {
-    use HasEnvironmentsTrait;
-
-    private string $accessToken = '';
-
     public function __construct(string $accessToken)
     {
         $this->accessToken = $accessToken;
@@ -23,10 +18,7 @@ class BrandsRequest extends Request implements HasResponse
         parent::__construct(
             "GET",
             $this->getBaseUrl() . '/brands',
-            [
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $this->accessToken,
-            ],
+            $this->getRequestHeaders(),
         );
     }
 

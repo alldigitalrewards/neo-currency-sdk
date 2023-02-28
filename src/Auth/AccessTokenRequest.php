@@ -20,18 +20,29 @@ class AccessTokenRequest extends Request implements HasResponse
             "POST",
             $this->getAccessTokenUrl(),
             ['Content-Type' => 'application/json'],
-            '{
-	"grant_type":"password",
-	"email":"' . $email . '",
-	"password":"' . $password . '",
-	"client_id":"' . $clientId . '",
-	"client_secret":"' . $clientSecret . '"
-}'
+            $this->makeJsonBody($clientId, $clientSecret, $email, $password)
         );
     }
 
     public function getResponseObject(): string
     {
         return AccessTokenResponse::class;
+    }
+
+    private function makeJsonBody(
+        string $clientId,
+        string $clientSecret,
+        string $email,
+        string $password
+    ): string {
+        return json_encode(
+            [
+                'grant_type' => 'refresh_token',
+                'email' => $email,
+                'password' => $password,
+                'client_id' => $clientId,
+                'client_secret' => $clientSecret,
+            ]
+        );
     }
 }
