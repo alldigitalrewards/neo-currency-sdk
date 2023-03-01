@@ -1,13 +1,13 @@
 <?php
 
 use AllDigitalRewards\NeoCurrency\Client;
-use AllDigitalRewards\NeoCurrency\Order\Order;
 use AllDigitalRewards\NeoCurrency\Order\OrderNowRequest;
 use AllDigitalRewards\NeoCurrency\Order\OrderResponse;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $request = new OrderNowRequest(
+    'client_id-here',
     'a-token-here',
     1344,
     "1.00",

@@ -12,8 +12,10 @@ class OrderNowRequest extends AbstractRequest implements HasResponse
     private int $quantity;
     private string $poNumber;
     private string $email;
+    private string $clientId;
 
     public function __construct(
+        string $clientId,
         string $accessToken,
         int $brandId,
         string $denomination,
@@ -21,6 +23,7 @@ class OrderNowRequest extends AbstractRequest implements HasResponse
         string $poNumber = '',
         string $email = ''
     ) {
+        $this->clientId = $clientId;
         $this->accessToken = $accessToken;
         $this->brandId = $brandId;
         $this->denomination = $denomination;
@@ -49,6 +52,7 @@ class OrderNowRequest extends AbstractRequest implements HasResponse
     {
         return json_encode(
             [
+                'client_id' => $this->clientId,
                 'purchase_order_number' => $this->poNumber,
                 'custom1' => $this->email,
                 'brands' => [
