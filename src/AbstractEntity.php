@@ -2,7 +2,9 @@
 
 namespace AllDigitalRewards\NeoCurrency;
 
-abstract class AbstractEntity
+use JsonSerializable;
+
+abstract class AbstractEntity implements JsonSerializable
 {
     public function __construct($data = null)
     {
