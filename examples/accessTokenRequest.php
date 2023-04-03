@@ -7,10 +7,10 @@ use AllDigitalRewards\NeoCurrency\Client;
 require __DIR__ . '/../vendor/autoload.php';
 
 $request = new AccessTokenRequest(
-    'client_id',
-    'client_secret',
-    'example@gmail.com',
-    'password',
+    'W3K86VL0ZLSUJWJQQ7KWHFD9',
+    'ZTWPH4SCZP6JXOA6OLM12W15BYG3UMBDOXBH8E2TL7037F9R',
+    'jhoughtelin@alldigitalrewards.com',
+    'TmGX*eV%iw2F',
 );
 
 $client = new Client();
