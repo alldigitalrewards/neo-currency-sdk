@@ -18,7 +18,7 @@ class AccessTokenRequest extends Request implements HasResponse
     ) {
         parent::__construct(
             "POST",
-            $this->getAccessTokenUrl(),
+            $this->getBaseUrl() . '/api/get-token',
             ['Content-Type' => 'application/json'],
             $this->makeJsonBody($clientId, $clientSecret, $email, $password)
         );

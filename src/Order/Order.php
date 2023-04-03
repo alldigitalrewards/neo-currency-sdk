@@ -3,12 +3,66 @@
 namespace AllDigitalRewards\NeoCurrency\Order;
 
 use AllDigitalRewards\NeoCurrency\AbstractEntity;
+use Exception;
 
 class Order extends AbstractEntity
 {
+    protected $campaign_brand_id;
+    protected $denomination;
+    protected $currency;
+    protected $codes;
+    protected $uuids;
     protected $order_id;
-    protected $custom1;
-    protected $data;
+
+    public function getCampaignBrandId()
+    {
+        return $this->campaign_brand_id;
+    }
+
+    public function setCampaignBrandId($campaign_brand_id): void
+    {
+        $this->campaign_brand_id = $campaign_brand_id;
+    }
+
+    public function getDenomination()
+    {
+        return $this->denomination;
+    }
+
+    public function setDenomination($denomination): void
+    {
+        $this->denomination = $denomination;
+    }
+
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency($currency): void
+    {
+        $this->currency = $currency;
+    }
+
+    public function getCodes()
+    {
+        return $this->codes;
+    }
+
+    public function setCodes($codes): void
+    {
+        $this->codes = $codes;
+    }
+
+    public function getUuids()
+    {
+        return $this->uuids;
+    }
+
+    public function setUuids($uuids): void
+    {
+        $this->uuids = $uuids;
+    }
 
     public function getOrderId()
     {
@@ -20,31 +74,11 @@ class Order extends AbstractEntity
         $this->order_id = $order_id;
     }
 
-    public function getCustom1()
+    /**
+     * @throws Exception
+     */
+    public function getOrderCode()
     {
-        return $this->custom1;
-    }
-
-    public function setCustom1($custom1): void
-    {
-        $this->custom1 = $custom1;
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function setData($data): void
-    {
-        if (!empty($data) && is_array($data)) {
-            $infoCollection = [];
-            foreach ($data as $info) {
-                $infoCollection[] = new OrderInfo($info);
-            }
-            $this->data = $infoCollection;
-            return;
-        }
-        $this->data = $data;
+        return $this->getCodes()[0] ?? throw new Exception('Code not present');
     }
 }
