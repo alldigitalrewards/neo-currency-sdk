@@ -31,7 +31,7 @@ class OrderCodeRequest extends AbstractRequest implements HasResponse
     {
         parent::__construct(
             "POST",
-            $this->getBaseUrl() . '/codes/create',
+            $this->getApiBaseUrl() . '/codes/create',
             $this->getRequestHeaders(),
             $this->makeJsonBody()
         );

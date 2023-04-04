@@ -4,7 +4,7 @@ namespace AllDigitalRewards\NeoCurrency\Traits;
 
 trait HasEnvironmentsTrait
 {
-    private string $baseUrl = 'https://redeem.yourdigitalreward.com';
+    protected string $baseUrl = 'https://redeem.yourdigitalreward.com';
     private bool $isProduction = false;
 
     public function isProduction(): bool
@@ -17,7 +17,7 @@ trait HasEnvironmentsTrait
         $this->isProduction = $isProduction;
     }
 
-    public function getBaseUrl(): string
+    public function getApiBaseUrl(): string
     {
         return getenv('ENVIRONMENT') === 'PRODUCTION' || $this->isProduction()
             ? $this->baseUrl . '/api'

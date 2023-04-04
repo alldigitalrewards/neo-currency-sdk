@@ -17,7 +17,7 @@ class BrandsRequest extends AbstractRequest implements HasResponse
     {
         parent::__construct(
             "GET",
-            $this->getBaseUrl() . '/brands',
+            $this->getApiBaseUrl() . '/brands',
             $this->getRequestHeaders(),
         );
     }
