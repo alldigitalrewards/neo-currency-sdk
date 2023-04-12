@@ -21,13 +21,16 @@ class OrderCodeResponse extends AbstractResponse
             throw new Exception('Order Failure');
         }
         $order = new Order($data['success'][0]);
+        if (empty($order->getCodes())) {
+            throw new Exception('Code(s) not present');
+        }
         $this->setOrder($order);
         return $this;
     }
 
     private function setOrder(Order $order)
     {
-        $this->order = new Order($order);
+        $this->order = $order;
     }
 
     public function getOrder(): Order
@@ -35,11 +38,12 @@ class OrderCodeResponse extends AbstractResponse
         return $this->order;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function getCodeUrl(): string
+    public function getCodeUrls(): array
     {
-        return $this->getActivateCodeBaseUrl() . '/' . $this->getOrder()->getOrderCode();
+        $container = [];
+        foreach ($this->getOrder()->getCodes() as $code) {
+            $container[] = $this->getActivateCodeBaseUrl() . '/' . $code;
+        }
+        return $container;
     }
 }
