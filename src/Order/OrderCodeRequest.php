@@ -10,6 +10,7 @@ class OrderCodeRequest extends AbstractRequest implements HasResponse
     private int $brandId;
     private float $denomination;
     private int $campaignId;
+    private int $qty;
     private string $clientId;
 
     public function __construct(
@@ -18,12 +19,14 @@ class OrderCodeRequest extends AbstractRequest implements HasResponse
         int $campaignId,
         int $brandId,
         string $denomination,
+        int $qty = 1,
     ) {
         $this->clientId = $clientId;
         $this->accessToken = $accessToken;
         $this->campaignId = $campaignId;
         $this->brandId = $brandId;
         $this->denomination = $denomination;
+        $this->qty = $qty;
         $this->setUpRequest();
     }
 
@@ -51,7 +54,7 @@ class OrderCodeRequest extends AbstractRequest implements HasResponse
                     [
                          "id" => $this->brandId,
                          "denomination" => $this->denomination,
-                         "quantity" => 1,
+                         "quantity" => $this->qty,
                          "client_id" => $this->clientId,
                     ]
                 ]
