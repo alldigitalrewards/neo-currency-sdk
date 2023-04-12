@@ -18,4 +18,4 @@ $client = new Client();
 /** @var OrderCodeResponse $order */
 $order = $client->request($request);
 print_r($order->getOrder()->getOrderId());
-print_r($order->getCodeUrl());
+print_r($order->getCodeUrls());

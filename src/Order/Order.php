@@ -3,7 +3,6 @@
 namespace AllDigitalRewards\NeoCurrency\Order;
 
 use AllDigitalRewards\NeoCurrency\AbstractEntity;
-use Exception;
 
 class Order extends AbstractEntity
 {
@@ -72,13 +71,5 @@ class Order extends AbstractEntity
     public function setOrderId($order_id): void
     {
         $this->order_id = $order_id;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getOrderCode()
-    {
-        return $this->getCodes()[0] ?? throw new Exception('Code not present');
     }
 }
