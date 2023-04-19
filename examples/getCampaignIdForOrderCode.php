@@ -1,0 +1,33 @@
+<?php
+
+use AllDigitalRewards\NeoCurrency\Campaigns\Campaign;
+use AllDigitalRewards\NeoCurrency\Campaigns\CampaignListRequest;
+use AllDigitalRewards\NeoCurrency\Campaigns\CampaignListResponse;
+use AllDigitalRewards\NeoCurrency\Funds\FundListResponse;
+use AllDigitalRewards\NeoCurrency\Funds\FundListRequest;
+use AllDigitalRewards\NeoCurrency\Client;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$request = new CampaignListRequest('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImI1MzVkMmYyZGEzYjg3MGY1YTdhMzIzOWRiNzdlMDdmOWY3Yjg4ZDdiODEzNzcxYzQ4NzcyZDg1MGY0OGViM2VmNjExNGJhZWFkZTI4NDIyIn0.eyJhdWQiOiJXM0s4NlZMMFpMU1VKV0pRUTdLV0hGRDkiLCJqdGkiOiJiNTM1ZDJmMmRhM2I4NzBmNWE3YTMyMzlkYjc3ZTA3ZjlmN2I4OGQ3YjgxMzc3MWM0ODc3MmQ4NTBmNDhlYjNlZjYxMTRiYWVhZGUyODQyMiIsImlhdCI6MTY4MTkzODYwNywibmJmIjoxNjgxOTM4NjA3LCJleHAiOjE2ODIwMjUwMDcsInN1YiI6IjEyNTMiLCJzY29wZXMiOltdfQ.N3Sm3TYu4jOUcKNZle1SEEAirhywbip3aRd8i1evRrQSI31LEeN0vY9IroJeMiQoL_VFCEN235Er7k3MC2dhX5x_AbalIuDyrA27i_xTG-4uzCmdpttloLt_43AyN1Kscg0WS_oaIrnQ0yK55ucrHyA5eJX1UEd_dYLjUy6MY2Rw_cJxTCjFGGYcQEdX_cnofbYAFMz2wCY0NEZN2KbDdpvB14ILkcS5hm6zk_RbwQD6Di1YmyZ6qoQe1R_Ib0Rh7vmvARrD5nbFbpsDMHZPiB7e-NttaX5jXJXLX0_jKt0iJgGEwUak-s-QN1PrhTYyZXtey6XAjgXIB_GGJKPn_AFSIrfnJL2pU9oMzYCLnf9a4wyHZApn20-3qVv0Cpd6uKl8n5tj0q2C-DrFmTcOGBzrDMrI-rPHKoqZfJZ5eNxcH8O-qokFMQrHSsWBP4C-NjU8n7KApopwa2alFO_zy7_bcDdv0REmRD_FH2a0558hGQnbEPTCUbpfWOmSFDvyyA9_NjP2dRaD295rS_ooG6FVY55fezCqkc9ZZ3nklilQRhARlTdl7w-Mco0IQ7e1gF4Roz6h9IlPXkZk432-AAhPCkJbOf89jqFWqp4PmztJkWKG6Rwd2BOegWoEiAT2AuP-iKZ2b48F0gAc04ApneIRnmOddrwiYTABHRxkoKw');
+$client = new Client();
+/** @var CampaignListResponse $response */
+$campaignsResponse = $client->request($request);
+/** @var Campaign[] $campaigns */
+$campaigns = $campaignsResponse->getCampaigns();
+
+//To get the Campaign ID for a Currency you will need to fetch Funds list
+//and then get the currency_id from the Fund object where the currency_code matches the Currency passed
+$request = new FundListRequest('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImI1MzVkMmYyZGEzYjg3MGY1YTdhMzIzOWRiNzdlMDdmOWY3Yjg4ZDdiODEzNzcxYzQ4NzcyZDg1MGY0OGViM2VmNjExNGJhZWFkZTI4NDIyIn0.eyJhdWQiOiJXM0s4NlZMMFpMU1VKV0pRUTdLV0hGRDkiLCJqdGkiOiJiNTM1ZDJmMmRhM2I4NzBmNWE3YTMyMzlkYjc3ZTA3ZjlmN2I4OGQ3YjgxMzc3MWM0ODc3MmQ4NTBmNDhlYjNlZjYxMTRiYWVhZGUyODQyMiIsImlhdCI6MTY4MTkzODYwNywibmJmIjoxNjgxOTM4NjA3LCJleHAiOjE2ODIwMjUwMDcsInN1YiI6IjEyNTMiLCJzY29wZXMiOltdfQ.N3Sm3TYu4jOUcKNZle1SEEAirhywbip3aRd8i1evRrQSI31LEeN0vY9IroJeMiQoL_VFCEN235Er7k3MC2dhX5x_AbalIuDyrA27i_xTG-4uzCmdpttloLt_43AyN1Kscg0WS_oaIrnQ0yK55ucrHyA5eJX1UEd_dYLjUy6MY2Rw_cJxTCjFGGYcQEdX_cnofbYAFMz2wCY0NEZN2KbDdpvB14ILkcS5hm6zk_RbwQD6Di1YmyZ6qoQe1R_Ib0Rh7vmvARrD5nbFbpsDMHZPiB7e-NttaX5jXJXLX0_jKt0iJgGEwUak-s-QN1PrhTYyZXtey6XAjgXIB_GGJKPn_AFSIrfnJL2pU9oMzYCLnf9a4wyHZApn20-3qVv0Cpd6uKl8n5tj0q2C-DrFmTcOGBzrDMrI-rPHKoqZfJZ5eNxcH8O-qokFMQrHSsWBP4C-NjU8n7KApopwa2alFO_zy7_bcDdv0REmRD_FH2a0558hGQnbEPTCUbpfWOmSFDvyyA9_NjP2dRaD295rS_ooG6FVY55fezCqkc9ZZ3nklilQRhARlTdl7w-Mco0IQ7e1gF4Roz6h9IlPXkZk432-AAhPCkJbOf89jqFWqp4PmztJkWKG6Rwd2BOegWoEiAT2AuP-iKZ2b48F0gAc04ApneIRnmOddrwiYTABHRxkoKw');
+$client = new Client();
+/** @var FundListResponse $fundsResponse */
+$fundsResponse = $client->request($request);
+$fundId = $fundsResponse->getFundIdByCurrencyCode('EUR');
+
+//then search the Campaigns list for the Campaign with the matching fund id
+//and thats the Campaign we want to be used to create an order code
+foreach ($campaigns as $campaign) {
+    if ($campaign->getFundId() === $fundId) {
+        var_dump($campaign->getId());
+    }
+}
