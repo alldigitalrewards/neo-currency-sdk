@@ -35,4 +35,31 @@ class CampaignListResponse extends AbstractResponse
     {
         return $this->campaigns;
     }
+
+    /**
+     * @throws Exception
+     */
+    public function getCampaignIdByCurrency(string $currencyCode): ?int
+    {
+        $fundId = $this->getFundIdByCurrencyCode($currencyCode);
+        foreach ($this->getCampaigns() as $campaign) {
+            if ($campaign->getFundId() === $fundId) {
+                return $campaign->getId();
+            }
+        }
+        throw new Exception('No Campaign ID found for currency code: ' . $currencyCode);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function getFundIdByCurrencyCode(string $currencyCode): ?int
+    {
+        return [
+                'USD' => 670,
+                'CAD' => 671,
+                'EUR' => 672,
+                'GBP' => 673,
+            ][$currencyCode] ?? throw new Exception('No Fund ID found for currency code: ' . $currencyCode);
+    }
 }
