@@ -19,14 +19,14 @@ trait HasEnvironmentsTrait
 
     public function getApiBaseUrl(): string
     {
-        return getenv('ENVIRONMENT') === 'PRODUCTION' || $this->isProduction()
+        return strtolower(getenv('ENVIRONMENT')) === 'production' || $this->isProduction()
             ? $this->baseUrl . '/api'
             : $this->baseUrl . '/api/sandbox';
     }
 
     public function getActivateCodeBaseUrl(): string
     {
-        return getenv('ENVIRONMENT') === 'PRODUCTION'
+        return strtolower(getenv('ENVIRONMENT')) === 'production'
             ? $this->baseUrl . '/activate-code'
             : $this->baseUrl . '/sandbox/activate-code';
     }
