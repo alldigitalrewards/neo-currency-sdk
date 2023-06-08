@@ -21,7 +21,7 @@ class CampaignListResponse extends AbstractResponse
         return $this;
     }
 
-    private function setCampaigns(array $data)
+    private function setCampaigns(array $data): void
     {
         foreach ($data as $campaign) {
             $this->campaigns[] = new Campaign($campaign);
@@ -41,25 +41,11 @@ class CampaignListResponse extends AbstractResponse
      */
     public function getCampaignIdByCurrency(string $currencyCode): ?int
     {
-        $fundId = $this->getFundIdByCurrencyCode($currencyCode);
         foreach ($this->getCampaigns() as $campaign) {
-            if ($campaign->getFundId() === $fundId) {
+            if (str_contains($campaign->getName(), $currencyCode)) {
                 return $campaign->getId();
             }
         }
         throw new Exception('No Campaign ID found for currency code: ' . $currencyCode);
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function getFundIdByCurrencyCode(string $currencyCode): ?int
-    {
-        return [
-                'USD' => 670,
-                'CAD' => 671,
-                'EUR' => 672,
-                'GBP' => 673,
-            ][$currencyCode] ?? throw new Exception('No Fund ID found for currency code: ' . $currencyCode);
     }
 }
