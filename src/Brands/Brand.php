@@ -12,6 +12,7 @@ class Brand extends AbstractEntity
     protected $value;
     protected $min;
     protected $max;
+    protected $step_size;
     protected $is_reward_choice;
     protected $reward_choice_type;
     protected $logo;
@@ -120,6 +121,16 @@ class Brand extends AbstractEntity
     public function setMax($max): void
     {
         $this->max = $max;
+    }
+
+    public function getStepSize()
+    {
+        return $this->step_size;
+    }
+
+    public function setStepSize($step_size): void
+    {
+        $this->step_size = $step_size;
     }
 
     public function getIsRewardChoice()
