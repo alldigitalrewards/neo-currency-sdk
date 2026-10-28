@@ -13,6 +13,14 @@ abstract class AbstractResponse extends AbstractEntity
     public function __construct(ResponseInterface $response)
     {
         $data = json_decode($response->getBody(), true);
+        if (!is_array($data)) {
+            throw new Exception(sprintf(
+                'NeoCurrency returned a non-JSON %s (HTTP %d %s)',
+                static::class,
+                $response->getStatusCode(),
+                $response->getReasonPhrase()
+            ));
+        }
         $this->evaluateErrorsIfExists($data);
         return $this->extractData($data);
     }
