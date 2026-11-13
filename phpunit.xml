@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" bootstrap="vendor/autoload.php" executionOrder="depends,defects" beStrictAboutOutputDuringTests="true" failOnRisky="true" failOnWarning="true" cacheDirectory=".phpunit.cache" requireCoverageMetadata="false" beStrictAboutCoverageMetadata="false">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" bootstrap="vendor/autoload.php" executionOrder="depends,defects" beStrictAboutOutputDuringTests="true" failOnRisky="true" failOnWarning="true" cacheDirectory=".phpunit.cache" requireCoverageMetadata="false" beStrictAboutCoverageMetadata="false">
   <testsuites>
     <testsuite name="unit">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
   <coverage>
-    <include>
-      <directory suffix=".php">src</directory>
-    </include>
-    <exclude>
-        </exclude>
     <report>
       <clover outputFile="build/logs/clover.xml"/>
       <crap4j outputFile="build/logs/crap4j.xml"/>
@@ -18,4 +13,11 @@
       <text outputFile="build/coverage.txt"/>
     </report>
   </coverage>
+  <source>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+    <exclude>
+        </exclude>
+  </source>
 </phpunit>

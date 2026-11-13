@@ -2,20 +2,27 @@
 
 namespace AllDigitalRewards\NeoCurrency;
 
-use AllDigitalRewards\NeoCurrency\Traits\HasEnvironmentsTrait;
 use GuzzleHttp\Psr7\Request;
 
-class AbstractRequest extends Request
+abstract class AbstractRequest extends Request implements HasResponse
 {
-    use HasEnvironmentsTrait;
+    protected function apiUrl(string $path, array $query = []): string
+    {
+        $isProduction = strtolower((string)getenv('ENVIRONMENT')) === 'production';
+        $url = ($isProduction
+            ? 'https://api.yourdigitalreward.com/v1'
+            : 'https://stage.api.yourdigitalreward.com/v1') . $path;
+        $query = array_filter($query, fn($value) => $value !== null);
 
-    protected string $accessToken = '';
+        return empty($query) ? $url : $url . '?' . http_build_query($query);
+    }
 
-    protected function getRequestHeaders(): array
+    protected function bearerHeaders(string $bearerToken): array
     {
         return [
+            'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->accessToken,
+            'Authorization' => 'Bearer ' . $bearerToken,
         ];
     }
 }
