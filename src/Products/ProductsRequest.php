@@ -17,13 +17,13 @@ class ProductsRequest extends AbstractRequest
     ) {
         parent::__construct(
             'GET',
-            self::apiUrl('/Products', [
+            $this->apiUrl('/Products', [
                 'pageIndex' => $pageIndex,
                 'pageSize' => $pageSize,
                 'currencyCode' => $currencyCode,
                 'productType' => $productType,
             ]),
-            self::bearerHeaders($bearerToken)
+            $this->bearerHeaders($bearerToken)
         );
     }
 

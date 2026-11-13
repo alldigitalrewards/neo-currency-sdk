@@ -8,7 +8,7 @@ class StatusRequest extends AbstractRequest
 {
     public function __construct(string $bearerToken)
     {
-        parent::__construct('GET', self::apiUrl('/Status'), self::bearerHeaders($bearerToken));
+        parent::__construct('GET', $this->apiUrl('/Status'), $this->bearerHeaders($bearerToken));
     }
 
     public function getResponseObject(): string

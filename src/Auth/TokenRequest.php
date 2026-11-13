@@ -10,7 +10,7 @@ class TokenRequest extends AbstractRequest
     {
         parent::__construct(
             'POST',
-            self::apiUrl('/Tokens'),
+            $this->apiUrl('/Tokens'),
             [
                 'Accept' => 'application/json',
                 'Email' => $email,

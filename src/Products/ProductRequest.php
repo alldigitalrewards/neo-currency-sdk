@@ -10,8 +10,8 @@ class ProductRequest extends AbstractRequest
     {
         parent::__construct(
             'GET',
-            self::apiUrl('/Products/' . rawurlencode($productId)),
-            self::bearerHeaders($bearerToken)
+            $this->apiUrl('/Products/' . rawurlencode($productId)),
+            $this->bearerHeaders($bearerToken)
         );
     }
 

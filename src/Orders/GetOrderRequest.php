@@ -10,8 +10,8 @@ class GetOrderRequest extends AbstractRequest
     {
         parent::__construct(
             'GET',
-            self::apiUrl('/Orders/' . rawurlencode($orderId)),
-            self::bearerHeaders($bearerToken)
+            $this->apiUrl('/Orders/' . rawurlencode($orderId)),
+            $this->bearerHeaders($bearerToken)
         );
     }
 
