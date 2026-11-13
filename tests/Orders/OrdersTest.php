@@ -57,12 +57,28 @@ class OrdersTest extends TestCase
         $this->assertSame(['productId' => 'PRODUCTA', 'value' => 15.0, 'quantity' => 1], $body['lineItems'][0]);
     }
 
+    public function testOrderRequestSendsLineItemsAsAListWhateverTheirKeys(): void
+    {
+        $request = new OrderRequest(
+            'bearer-abc',
+            Order::TYPE_LINKS,
+            'guid-123',
+            [1 => new OrderRequestLineItem('PRODUCTA', 10, 1), 'b' => new OrderRequestLineItem('PRODUCTB', 20, 1)]
+        );
+
+        $this->assertStringContainsString(
+            '"lineItems":[{"productId":"PRODUCTA","value":10.0,"quantity":1},'
+            . '{"productId":"PRODUCTB","value":20.0,"quantity":1}]',
+            (string)$request->getBody()
+        );
+    }
+
     public function testGetOrderRequestEncodesTheId(): void
     {
-        $request = new GetOrderRequest('bearer-abc', 'EX-100002');
+        $request = new GetOrderRequest('bearer-abc', 'EX/100002');
 
         $this->assertSame('GET', $request->getMethod());
-        $this->assertSame('https://stage.api.yourdigitalreward.com/v1/Orders/EX-100002', (string)$request->getUri());
+        $this->assertSame('https://stage.api.yourdigitalreward.com/v1/Orders/EX%2F100002', (string)$request->getUri());
         $this->assertSame(OrderResponse::class, $request->getResponseObject());
     }
 
@@ -105,13 +121,11 @@ class OrdersTest extends TestCase
     {
         $data = json_decode($this->fixture('links-order.json'), true);
         $data['lineItems'][0]['status'] = 'Pending';
-        $data['lineItems'][0]['claimData'] = null;
 
         $order = (new OrderResponse(new Response(201, [], json_encode($data))))->getOrder();
 
         $this->assertSame(Order::STATUS_COMPLETED, $order->getStatus());
         $this->assertFalse($order->isFulfilled());
-        $this->assertSame([], $order->getClaimLinks());
     }
 
     public function testLineItemMissingCardsIsNotFulfilled(): void

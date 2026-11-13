@@ -18,9 +18,9 @@ class OrderRequest extends AbstractRequest
     ) {
         parent::__construct(
             'POST',
-            self::apiUrl('/Orders'),
-            self::bearerHeaders($bearerToken),
-            self::makeJsonBody($type, $poNumber, $lineItems, $departmentId)
+            $this->apiUrl('/Orders'),
+            $this->bearerHeaders($bearerToken),
+            $this->makeJsonBody($type, $poNumber, $lineItems, $departmentId)
         );
     }
 
@@ -29,12 +29,12 @@ class OrderRequest extends AbstractRequest
         return OrderResponse::class;
     }
 
-    private static function makeJsonBody(string $type, string $poNumber, array $lineItems, ?string $department): string
+    private function makeJsonBody(string $type, string $poNumber, array $lineItems, ?string $department): string
     {
         $body = [
             'type' => $type,
             'poNumber' => $poNumber,
-            'lineItems' => array_map(fn(OrderRequestLineItem $lineItem) => $lineItem->toArray(), $lineItems),
+            'lineItems' => array_values(array_map(fn(OrderRequestLineItem $item) => $item->toArray(), $lineItems)),
         ];
         if ($department !== null) {
             $body['departmentId'] = $department;

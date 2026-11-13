@@ -25,6 +25,23 @@ class StatusTest extends TestCase
         $this->assertInstanceOf(StatusResponse::class, new StatusResponse(new Response(200, [], '')));
     }
 
+    public function testRedirectIsNotTreatedAsHealthy(): void
+    {
+        $this->expectException(ApiException::class);
+        $this->expectExceptionCode(302);
+        $this->expectExceptionMessage('NeoCurrency returned HTTP 302 Found for ' . StatusResponse::class);
+
+        new StatusResponse(new Response(302, ['Location' => '/500'], ''));
+    }
+
+    public function testInformationalStatusIsNotTreatedAsHealthy(): void
+    {
+        $this->expectException(ApiException::class);
+        $this->expectExceptionCode(100);
+
+        new StatusResponse(new Response(100, [], ''));
+    }
+
     public function testUnauthorizedRaisesApiException(): void
     {
         $this->expectException(ApiException::class);
