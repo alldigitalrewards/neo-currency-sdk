@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": "MGWGCPB",
+      "name": "Example Fixed Brand",
+      "denominations": [10, 25, 50],
+      "denominationType": "Fixed",
+      "type": "Digital",
+      "shortDescription": "<p>Short</p>",
+      "longDescription": "<p>Long description</p>",
+      "terms": "<p>Terms</p>",
+      "disclaimer": "Disclaimer",
+      "redemptionNote": "Redeem online",
+      "currencyCode": "USD",
+      "cultureCodes": ["en-US"],
+      "media": {
+        "faceplates": [
+          {"name": "Default", "path": "https://www.example.com/faceplate.png"}
+        ]
+      },
+      "translations": [
+        {"cultureCode": "fr", "name": "Exemple"}
+      ]
+    },
+    {
+      "id": "VARCAD",
+      "name": "Example Variable Brand",
+      "denominations": [5, 500],
+      "denominationType": "Variable",
+      "type": "Digital",
+      "currencyCode": "CAD",
+      "cultureCodes": ["en-CA", "fr-CA"],
+      "media": null,
+      "translations": null
+    }
+  ],
+  "page": 1,
+  "pageSize": 2,
+  "totalCount": 3
+}

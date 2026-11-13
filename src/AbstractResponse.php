@@ -2,56 +2,44 @@
 
 namespace AllDigitalRewards\NeoCurrency;
 
-use Exception;
+use AllDigitalRewards\NeoCurrency\Exceptions\ApiException;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractResponse extends AbstractEntity
 {
     /**
-     * @throws Exception
+     * @throws ApiException
      */
     public function __construct(ResponseInterface $response)
     {
-        $data = json_decode($response->getBody(), true);
-        if (!is_array($data)) {
-            throw new Exception(sprintf(
-                'NeoCurrency returned a non-JSON %s (HTTP %d %s)',
-                static::class,
-                $response->getStatusCode(),
-                $response->getReasonPhrase()
-            ));
+        if ($response->getStatusCode() >= 400) {
+            throw ApiException::fromResponse($response, static::class);
         }
-        $this->evaluateErrorsIfExists($data);
-        return $this->extractData($data);
+        $this->extractData($this->decodeBody($response));
     }
 
     /**
-     * @throws Exception
+     * @throws ApiException
      */
-    public function evaluateErrorsIfExists($data)
+    protected function decodeBody(ResponseInterface $response): array
     {
-        if (!empty($data['errors'])) {
-            if (!is_array($data['errors'])) {
-                $error = $data['errors'];
-            } else {
-                $error = implode(', ', $this->getError($data['errors']));
-            }
-            throw new Exception($error);
+        $data = json_decode((string)$response->getBody(), true);
+        if (!is_array($data)) {
+            throw new ApiException(
+                sprintf(
+                    'NeoCurrency returned a non-JSON %s (HTTP %d %s)',
+                    static::class,
+                    $response->getStatusCode(),
+                    $response->getReasonPhrase()
+                ),
+                $response->getStatusCode()
+            );
         }
+        return $data;
     }
 
+    /**
+     * @throws ApiException
+     */
     abstract public function extractData(array $data): AbstractResponse;
-
-    private function getError($errors): array
-    {
-        $flat = [];
-        foreach ($errors as $value) {
-            if (is_array($value)) {
-                $flat = array_merge($flat, $this->getError($value));
-            } else {
-                $flat[] = $value;
-            }
-        }
-        return $flat;
-    }
 }

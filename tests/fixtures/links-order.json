@@ -1,0 +1,29 @@
+{
+  "id": "EX-100002",
+  "timestamp": "2026-01-15T14:30:00Z",
+  "date": "1/15/2026 2:30:00 PM",
+  "status": "Completed",
+  "lineItems": [
+    {
+      "id": "EX-100002_0",
+      "status": "Completed",
+      "claimData": [
+        {
+          "id": "200002-1",
+          "claimLink": "https://example.com/xxxxx/yyyyyyy/zzzzzz",
+          "claimLinkChallengeAnswer": "ABC123"
+        }
+      ],
+      "cost": 15.0,
+      "productId": "PRODUCTA",
+      "value": 15.0,
+      "quantity": 1,
+      "personalization": {
+        "deliveryDate": "2026-01-15T14:30:00Z"
+      }
+    }
+  ],
+  "currencyCode": "USD",
+  "type": "Links",
+  "poNumber": "EX-789-123"
+}

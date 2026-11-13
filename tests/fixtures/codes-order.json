@@ -1,0 +1,72 @@
+{
+  "id": "EX-100003",
+  "timestamp": "2026-01-15T14:30:00Z",
+  "date": "1/15/2026 2:30:00 PM",
+  "status": "Completed",
+  "lineItems": [
+    {
+      "id": "EX-100003_0",
+      "status": "Completed",
+      "claimData": [
+        {
+          "id": "200003-1",
+          "claimTimestamp": "2026-01-15T14:31:00Z",
+          "barcodePath": "https://www.example.com/barcode.png",
+          "barcodeChars": "1234567890123451",
+          "barcodeType": "Code128",
+          "codes": [
+            {
+              "label": "Gift Card Number",
+              "value": "1234 5678 9012 3451"
+            },
+            {
+              "label": "PIN",
+              "value": "1231"
+            }
+          ]
+        },
+        {
+          "id": "200003-2",
+          "claimTimestamp": "2026-01-15T14:31:00Z",
+          "barcodePath": "https://www.example.com/barcode.png",
+          "barcodeChars": "1234567890123452",
+          "barcodeType": "Code128",
+          "codes": [
+            {
+              "label": "Gift Card Number",
+              "value": "1234 5678 9012 3452"
+            },
+            {
+              "label": "PIN",
+              "value": "1232"
+            }
+          ]
+        },
+        {
+          "id": "200003-3",
+          "claimTimestamp": "2026-01-15T14:31:00Z",
+          "barcodePath": "https://www.example.com/barcode.png",
+          "barcodeChars": "1234567890123453",
+          "barcodeType": "Code128",
+          "codes": [
+            {
+              "label": "Gift Card Number",
+              "value": "1234 5678 9012 3453"
+            },
+            {
+              "label": "PIN",
+              "value": "1233"
+            }
+          ]
+        }
+      ],
+      "cost": 45.0,
+      "productId": "PRODUCTA",
+      "value": 15.0,
+      "quantity": 3
+    }
+  ],
+  "currencyCode": "USD",
+  "type": "Codes",
+  "poNumber": "EX-789-ABC"
+}
