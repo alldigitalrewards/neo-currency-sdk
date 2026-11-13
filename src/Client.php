@@ -9,7 +9,7 @@ class Client
 {
     private ClientInterface $httpClient;
 
-    public function __construct(ClientInterface $httpClient = null)
+    public function __construct(?ClientInterface $httpClient = null)
     {
         if ($httpClient === null) {
             $httpClient = new \GuzzleHttp\Client();
